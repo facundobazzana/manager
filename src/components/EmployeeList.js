@@ -8,13 +8,14 @@ import ListItem from './ListItem';
 class EmployeeList extends Component {
 
   // Lo hace porque la respuesta con la información no es inmediata
-
+  // Al principio no tiene valores, todavía no llegó la respuesta
   componentWillMount() {
     this.props.employeesFetch();
 
     this.createDataSource(this.props);
   }
 
+  // Al recibir los nuevos valores, se actualiza el datasource
   componentWillReceiveProps(nextProps) {
     // nextProps are the next set of props that this component
     // will be rendered with this.props is still the old set of props
