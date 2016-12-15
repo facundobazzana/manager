@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Alert } from 'react-native';
 import _ from 'lodash';
 import Communications from 'react-native-communications';
 import EmployeeForm from './EmployeeForm';
@@ -20,12 +21,18 @@ class EmployeeEdit extends Component {
   onButtonPress() {
     const { name, phone, day } = this.props;
 
+    if (name === '' || phone === '') {
+      return (
+        Alert.alert('Campos invalidos', 'Debe completar los campos obligatorios')
+      );
+    }
+
     this.props.employeeSave({ name, phone, day, uid: this.props.employee.uid });
   }
 
   onTextPress() {
     const { phone, day } = this.props;
-    
+
     Communications.text(phone, `Your upcoming shift is on ${day}`);
   }
 
@@ -45,6 +52,13 @@ class EmployeeEdit extends Component {
               Text schedule
             </Button>
           </CardSection>
+
+          <CardSection>
+            <Button>
+              Fire
+            </Button>
+          </CardSection>
+
         </Card>
       );
   }
